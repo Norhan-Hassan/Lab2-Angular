@@ -1,0 +1,41 @@
+<div class="container mt-3">
+  <input
+    type="text"
+    class="form-control mb-3"
+    placeholder="Search by name..."
+    [(ngModel)]="searchTerm"
+  />
+
+  <select class="form-control mb-3" [(ngModel)]="selectedCategory">
+    <option [ngValue]="0">All Categories</option>
+    <option *ngFor="let cat of categories" [ngValue]="cat.id">{{ cat.name }}</option>
+  </select>
+
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let product of filteredProducts">
+      <div class="card shadow-lg">
+        <img [src]="product.img" class="card-img-top" alt="{{ product.name }}" />
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">Price: {{ product.price | currency : 'USD' }}</p>
+
+          <div [ngSwitch]="product.quantity">
+            <span *ngSwitchCase="0" class="text-danger">Out of stock</span>
+            <span *ngSwitchCase="1" class="text-warning">Last one item</span>
+            <span *ngSwitchCase="2" class="text-warning">Last two items</span>
+            <span *ngSwitchDefault class="text-success">In stock</span>
+          </div>
+
+          <button
+            class="btn btn-primary me-2"
+            (click)="buyProduct(product)"
+            [disabled]="product.quantity === 0"
+          >
+            Buy
+          </button>
+          <button class="btn btn-info" (click)="showDetails(product)">Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
