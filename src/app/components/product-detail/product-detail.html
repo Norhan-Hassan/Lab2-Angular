@@ -1,0 +1,9 @@
+<div class="detail-card mt-3 p-3 border rounded bg-light">
+  <h2>Product Details</h2>
+  <img [src]="product.img" alt="{{ product.name }}" class="mb-3" width="150" />
+  <h3>{{ product.name }}</h3>
+  <p>Price: {{ product.price | currency }}</p>
+  <p>Quantity: {{ product.quantity }}</p>
+
+  <button class="btn btn-secondary" (click)="closeDetails()">Close Details</button>
+</div>
