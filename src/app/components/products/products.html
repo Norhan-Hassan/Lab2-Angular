@@ -13,7 +13,7 @@
 
   <div class="row">
     <div class="col-md-4 mb-3" *ngFor="let product of filteredProducts">
-      <div class="card shadow-lg">
+      <div class="card shadow-lg" appProductCard>
         <img [src]="product.img" class="card-img-top" alt="{{ product.name }}" />
         <div class="card-body">
           <h5 class="card-title">{{ product.name }}</h5>
@@ -39,3 +39,5 @@
     </div>
   </div>
 </div>
+<p class="text-muted">Date: {{ today | date : 'fullDate' }}</p>
+<p>Credit Card: {{ creditCardNumber | creditCard }}</p>

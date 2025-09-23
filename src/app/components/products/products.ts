@@ -3,9 +3,11 @@ import { IProduct } from '../../models/iproduct';
 import { ICategory } from '../../models/icategory';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ProductCard } from '../../directives/product-card';
+import { CreditCardPipe } from '../../pipes/pipes/credit-card-pipe';
 @Component({
   selector: 'app-products',
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, ProductCard, CreditCardPipe],
   templateUrl: './products.html',
   styleUrl: './products.css',
 })
@@ -19,6 +21,8 @@ export class Products {
   ];
 
   selectedCategory: number = 0;
+  today: Date = new Date();
+  creditCardNumber: string = '1234567812345678';
 
   products: IProduct[] = [
     {
@@ -26,7 +30,7 @@ export class Products {
       name: 'T-Shirt',
       quantity: 5,
       price: 200,
-      img: 'https://fakeimg.pl/300x200/?text=T-Shirt',
+      img: 'images/t.jpg',
       categoryID: 1,
     },
     {
@@ -34,7 +38,7 @@ export class Products {
       name: 'Jeans',
       quantity: 2,
       price: 400,
-      img: 'https://fakeimg.pl/300x200/?text=Jeans',
+      img: 'images/j.jpg',
       categoryID: 1,
     },
     {
@@ -42,7 +46,7 @@ export class Products {
       name: 'Necklace',
       quantity: 0,
       price: 150,
-      img: 'https://fakeimg.pl/300x200/?text=Necklace',
+      img: 'images/N.jpg',
       categoryID: 2,
     },
     {
@@ -50,7 +54,7 @@ export class Products {
       name: 'Sneakers',
       quantity: 10,
       price: 600,
-      img: 'https://fakeimg.pl/300x200/?text=Sneakers',
+      img: 'images/s.jpg',
       categoryID: 3,
     },
   ];
