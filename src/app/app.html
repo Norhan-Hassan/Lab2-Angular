@@ -3,7 +3,15 @@
 <div class="container mt-4">
   <router-outlet></router-outlet>
 </div>
+<div class="container text-center mt-5">
+  <button class="btn btn-primary mb-3" (click)="toggleClock()">
+    {{ showClock ? 'Hide Clock' : 'Show Clock' }}
+  </button>
 
+  @if(showClock) {
+  <app-clock></app-clock>
+  }
+</div>
 <app-footer></app-footer>
 
 <!-- <app-header></app-header>

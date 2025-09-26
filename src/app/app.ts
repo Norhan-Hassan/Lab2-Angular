@@ -4,13 +4,19 @@ import { Products } from './components/products/products';
 import { Footer } from './components/footer/footer';
 import { Header } from './components/header/header';
 import { ProductList } from './components/product-list/product-list';
+import { Clock } from "./components/clock/clock";
 
 @Component({
   selector: 'app-root',
-  imports: [Products, Footer, Header, ProductList, RouterOutlet], // import products and product list for the labs before lab 4
+  imports: [Products, Footer, Header, ProductList, RouterOutlet, Clock], // import products and product list for the labs before lab 4
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
 export class App {
+  showClock = true;
+
+  toggleClock() {
+    this.showClock = !this.showClock;
+  }
   protected readonly title = signal('Lab2');
 }
