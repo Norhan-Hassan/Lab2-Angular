@@ -1,13 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { Products } from "./components/products/products";
-import { Footer } from "./components/footer/footer";
-import { Header } from "./components/header/header";
-import { ProductList } from "./components/product-list/product-list";
+import { Products } from './components/products/products';
+import { Footer } from './components/footer/footer';
+import { Header } from './components/header/header';
+import { ProductList } from './components/product-list/product-list';
 
 @Component({
   selector: 'app-root',
-  imports: [Products, Footer, Header, ProductList],
+  imports: [Products, Footer, Header, ProductList, RouterOutlet], // import products and product list for the labs before lab 4
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
