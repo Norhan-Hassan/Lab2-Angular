@@ -1,0 +1,53 @@
+<!-- user-login.component.html -->
+<div class="container mt-4">
+  <h3>User Login</h3>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate>
+    <!-- Email -->
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input
+        type="email"
+        formControlName="email"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': f['email'].touched && f['email'].invalid,
+          'is-valid': f['email'].touched && f['email'].valid
+        }"
+      />
+      <div *ngIf="f['email'].touched && f['email'].invalid" class="invalid-feedback">
+        <div *ngIf="f['email'].errors?.['required']">Email is required.</div>
+        <div *ngIf="f['email'].errors?.['email']">Invalid email format.</div>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input
+        type="password"
+        formControlName="password"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': f['password'].touched && f['password'].invalid,
+          'is-valid': f['password'].touched && f['password'].valid
+        }"
+      />
+      <div *ngIf="f['password'].touched && f['password'].invalid" class="invalid-feedback">
+        <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
+        <div *ngIf="f['password'].errors?.['minlength']">Minimum 6 characters required.</div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <button type="submit" class="btn btn-primary me-2" [disabled]="loginForm.invalid">Login</button>
+    <button type="button" class="btn btn-warning" (click)="resetForm()">Reset</button>
+  </form>
+
+  <!-- Submitted Data -->
+  <div *ngIf="submittedData" class="card mt-4">
+    <div class="card-body">
+      <h5>Submitted Data:</h5>
+      <pre>{{ submittedData | json }}</pre>
+    </div>
+  </div>
+</div>

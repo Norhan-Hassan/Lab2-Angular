@@ -1,0 +1,123 @@
+<!-- user-registration.component.html -->
+<div class="container mt-4">
+  <h3>User Registration</h3>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" novalidate>
+    <!-- Full Name -->
+    <div class="mb-3">
+      <label class="form-label">Full Name</label>
+      <input
+        type="text"
+        formControlName="fullName"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': f['fullName'].touched && f['fullName'].invalid,
+          'is-valid': f['fullName'].touched && f['fullName'].valid
+        }"
+      />
+      <div *ngIf="f['fullName'].touched && f['fullName'].invalid" class="invalid-feedback">
+        <div *ngIf="f['fullName'].errors?.['required']">Full Name is required.</div>
+        <div *ngIf="f['fullName'].errors?.['minlength']">Minimum 5 characters required.</div>
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="mb-3">
+      <label class="form-label">Email</label>
+      <input
+        type="email"
+        formControlName="email"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': f['email'].touched && f['email'].invalid,
+          'is-valid': f['email'].touched && f['email'].valid
+        }"
+      />
+      <div *ngIf="f['email'].touched && f['email'].invalid" class="invalid-feedback">
+        <div *ngIf="f['email'].errors?.['required']">Email is required.</div>
+        <div *ngIf="f['email'].errors?.['email']">Invalid email format.</div>
+        <div *ngIf="f['email'].errors?.['pattern']">Email pattern not matched.</div>
+      </div>
+    </div>
+
+    <!-- Mobiles -->
+    <div formArrayName="mobiles">
+      <label class="form-label">Mobile Numbers</label>
+      <div
+        *ngFor="let mob of mobiles.controls; let i = index"
+        [formGroupName]="i"
+        class="mb-2 d-flex gap-2"
+      >
+        <input
+          type="text"
+          formControlName="number"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': mob.get('number')?.touched && mob.get('number')?.invalid,
+            'is-valid': mob.get('number')?.touched && mob.get('number')?.valid
+          }"
+        />
+        <button type="button" class="btn btn-danger" (click)="removeMobile(i)" *ngIf="i > 0">
+          Remove
+        </button>
+      </div>
+      <div class="mt-2">
+        <button type="button" class="btn btn-secondary" (click)="addMobile()">
+          Add Another Mobile
+        </button>
+      </div>
+    </div>
+
+    <!-- Password -->
+    <div class="mb-3 mt-3">
+      <label class="form-label">Password</label>
+      <input
+        type="password"
+        formControlName="password"
+        class="form-control"
+        [ngClass]="{
+          'is-invalid': f['password'].touched && f['password'].invalid,
+          'is-valid': f['password'].touched && f['password'].valid
+        }"
+      />
+      <div *ngIf="f['password'].touched && f['password'].invalid" class="invalid-feedback">
+        <div *ngIf="f['password'].errors?.['required']">Password is required.</div>
+        <div *ngIf="f['password'].errors?.['minlength']">Minimum 6 characters required.</div>
+      </div>
+    </div>
+
+    <!-- Confirm Password -->
+    <div class="mb-3">
+      <label class="form-label">Confirm Password</label>
+      <input
+        type="password"
+        formControlName="confirmPassword"
+        class="form-control"
+        [ngClass]="{'is-invalid': f['confirmPassword'].touched && f['confirmPassword'].invalid || registrationForm.errors?.['mismatch'],
+                         'is-valid': f['confirmPassword'].touched && f['confirmPassword'].valid && !registrationForm.errors?.['mismatch']}"
+      />
+      <div
+        *ngIf="f['confirmPassword'].touched && f['confirmPassword'].invalid"
+        class="invalid-feedback"
+      >
+        Confirm Password is required.
+      </div>
+      <div *ngIf="registrationForm.errors?.['mismatch']" class="invalid-feedback">
+        Passwords do not match.
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <button type="submit" class="btn btn-primary me-2" [disabled]="registrationForm.invalid">
+      Register
+    </button>
+    <button type="button" class="btn btn-warning" (click)="resetForm()">Reset</button>
+  </form>
+
+  <!-- Submitted Data -->
+  <div *ngIf="submittedData" class="card mt-4">
+    <div class="card-body">
+      <h5>Submitted Data:</h5>
+      <pre>{{ submittedData | json }}</pre>
+    </div>
+  </div>
+</div>
